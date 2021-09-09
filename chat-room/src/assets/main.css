@@ -9,6 +9,7 @@ body {
     border-radius: 20px;
     box-shadow: 2px 4px 6px rgba(28, 6, 49, 0.1);
     background: white;
+    text-align: left;
   }
   .error {
     color: #ff3f80;

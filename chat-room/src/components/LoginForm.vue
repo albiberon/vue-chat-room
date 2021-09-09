@@ -1,5 +1,5 @@
 <template>
-  <p> Signup Form </p>
+  <p> Log in Form </p>
   <form @submit.prevent="handleSubmit">
       <input type="email" required placeholder="Email" v-model="email">
       <input type="password" required placeholder="Password" v-model="password">
@@ -11,7 +11,6 @@
 <script>
 import { ref } from '@vue/reactivity'
 import useLogin from '../composables/useLogin'
-import { useRouter } from 'vue-router'
 
 export default {
     setup(props, context) {
@@ -26,7 +25,6 @@ export default {
                 if (!error.value) {
                     // console.log('User logged in')
                     context.emit('login')
-                    router.push({name: 'Chatroom'})
                 } 
         }
         

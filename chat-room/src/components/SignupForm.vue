@@ -1,5 +1,5 @@
 <template>
-  <p> Signup Form </p>
+  <p> Sign up Form </p>
   <form @submit.prevent="handleSubmit">
       <input type="text" required placeholder="Display name" v-model="displayName">
       <input type="email" required placeholder="Email" v-model="email">

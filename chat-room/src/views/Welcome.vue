@@ -14,7 +14,7 @@
 <script>
 import SignupForm from '../components/SignupForm.vue'
 import LoginForm from '../components/LoginForm.vue'
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 
@@ -60,16 +60,12 @@ export default {
     color: #999;
     margin: 10px auto;
   }
-
-  .welcome span {
-    /* font-weight: bold; */
+  .welcome span{
+    font-weight: bold;
     text-decoration: underline;
     cursor: pointer;
   }
-
   .welcome button {
     margin: 20px auto;
   }
-
-
 </style>

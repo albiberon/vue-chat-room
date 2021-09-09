@@ -1,8 +1,8 @@
 <template>
-  <nav>
+  <nav v-if="user">
     <div>
-      <p>Hey there... display name here</p>
-      <p class="email">Currently logged in as... email</p>
+      <p>Hey there {{user.displayName}}</p>
+      <p class="email">Currently logged in as {{user.email}}</p>
     </div>
     <button @click="handleClick">Logout</button>
   </nav>
@@ -10,23 +10,25 @@
 
 <script>
 import useLogout from '../composables/useLogout'
-import { useRouter } from 'vue-router'
-
+// import { useRouter } from 'vue-router'
+import getUser from '../composables/getUser'
 
 export default {
 setup(){
     const { logout, error } = useLogout()
-    const router = useRouter()
+    const { user } = getUser()
+
+    //const router = useRouter()
     
     const handleClick =async () => {
         await logout()
         if(!error.value) {
             console.log('user logged out')
-            router.push({name: 'Welcome'})
+            // router.push({name: 'Welcome'}) better solution with watch method is on Chatroom view
         }
     }
 
-    return { handleClick }
+    return { handleClick, user}
 }
 
 
