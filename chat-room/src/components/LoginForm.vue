@@ -11,6 +11,7 @@
 <script>
 import { ref } from '@vue/reactivity'
 import useLogin from '../composables/useLogin'
+import { useRouter } from 'vue-router'
 
 export default {
     setup(props, context) {
@@ -25,6 +26,7 @@ export default {
                 if (!error.value) {
                     // console.log('User logged in')
                     context.emit('login')
+                    router.push({name: 'Chatroom'})
                 } 
         }
         
