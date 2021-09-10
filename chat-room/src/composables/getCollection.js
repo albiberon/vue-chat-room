@@ -13,7 +13,9 @@ const getCollection = (collection) => {
     let collectionRef = projectFirestore.collection(collection)
     .orderBy('createdAt')
 
-    collectionRef.onSnapshot( (snap) => {
+    // onSnapshot is put inside unsub to trigger unsubscription from
+    // the real time listener
+    const unsub = collectionRef.onSnapshot( (snap) => {
         let results = []
         snap.docs.forEach(doc => {
             // doc.data().createdAt makes the second part waits for 
@@ -27,6 +29,11 @@ const getCollection = (collection) => {
         documents.value = null
         error.value = 'could not fetch data'
     })
+
+    watchEffect((onInvalidate) => {
+        onInvalidate(() => unsub())
+    })
+
     return { documents, error }
 }
 

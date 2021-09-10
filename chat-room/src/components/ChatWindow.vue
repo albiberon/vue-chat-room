@@ -1,7 +1,7 @@
 <template>
   <div class="chat">
       <div v-if="error"> {{ error }} </div>
-      <div v-if="documents" class="messages">
+      <div v-if="documents" class="messages" ref="messages">
           <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
               <span class="created-at">{{ doc.createdAt }}</span>
               <span class="name">{{ doc.user }}</span>
@@ -15,6 +15,7 @@
 import getCollection from '../composables/getCollection'
 import { formatDistanceToNow } from 'date-fns'
 import { computed } from '@vue/reactivity'
+import { onUpdated, ref } from '@vue/runtime-core'
 
 
 export default {
@@ -33,7 +34,14 @@ export default {
             }
         })
 
-        return { error, documents, formattedDocuments }
+        // auto-scroll to bottom related script
+        const messages = ref(null)
+
+        onUpdated(()=> {
+            messages.value.scrollTop = messages.value.scrollHeight
+        })
+
+        return { error, documents, formattedDocuments, messages }
     }
 }
 </script>
