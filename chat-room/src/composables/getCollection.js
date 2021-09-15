@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '../firebase/config'
 
 //composable with realtime listener
@@ -12,7 +12,6 @@ const getCollection = (collection) => {
 
     let collectionRef = projectFirestore.collection(collection)
     .orderBy('createdAt')
-
     // onSnapshot is put inside unsub to trigger unsubscription from
     // the real time listener
     const unsub = collectionRef.onSnapshot( (snap) => {
